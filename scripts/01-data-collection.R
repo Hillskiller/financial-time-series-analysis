@@ -20,32 +20,34 @@ apple_data <- getSymbols(symbol, src = stock_source,
                          from = starting_date, to = end_data, 
                          auto.assign = FALSE)
 
-# Making a dataframe only for the close column
-apple_closes <- apple_data$AAPL.Close
-
-# Making a tibble version for visualization
+# Making a tibble version for an easier use
 apple_tbl <- tibble(
-  date = index(apple_closes),          # Dates
-  close = coredata(apple_closes)       # Values
+  date = index(apple_data),
+  open = coredata(apple_data$AAPL.Open),
+  high = coredata(apple_data$AAPL.High),
+  low = coredata(apple_data$AAPL.Low),
+  close = coredata(apple_data$AAPL.Close),
+  volume = coredata(apple_data$AAPL.Volume),
+  adjusted = coredata(apple_data$AAPL.Adjusted),
 )
 
 # Printing recent rows with Date & Price as columns
-head(cbind(Date = index(apple_closes), Price = coredata(apple_closes)))
+head(cbind(Date = index(apple_tbl), Price = coredata(apple_tbl$close)))
 
 # Checking for the amount of NULL values
-sum(is.na(apple_data$AAPL.Close))
+sum(is.na(apple_tbl$close))
 
 # Checking the dimensions of the dataframe
-dim(apple_closes)
+dim(apple_tbl)
 
 # Checking the range of date in the data
-range(index(apple_closes))
+range(apple_tbl$date)
 
 # Checking which classes are inside the data
-class(apple_closes)
+class(apple_tbl)
 
 # Printing a summary of the data
-summary(apple_closes)
+summary(apple_tbl)
 
 # Defining the path to save the Parquet file
 output_path <- file.path("data", paste0(symbol, "_stock_data.parquet"))
