@@ -19,7 +19,7 @@ R_financial_time_series_analysis/
 ├── scripts/                  # R scripts by stage (data collection, EDA, modeling, etc.)
 │   ├── 01-data-collection.R
 │   └── 02-exploratory-analysis.R
-├── data/                    # Folder for raw or sample data (if used)
+├── data/                    # Folder for raw or sample data
 ├── .gitignore
 ├── README.md
 └── LICENSE                  # Open-source license
@@ -37,7 +37,7 @@ cd financial-time-series-analysis
 
 In RStudio or the R console:
 
-install.packages(c("quantmod", "forecast", "tseries", "ggplot2", "tidyverse"))
+install.packages(c("quantmod", "forecast", "tseries", "ggplot2", "tidyverse", "arrow"))
 
 source("scripts/01-data-collection.R")
 source("scripts/02-exploratory-analysis.R")

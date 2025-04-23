@@ -1,21 +1,21 @@
-# Time Series Forecasting of Stock Prices in R
+# Time Series Analysis in R
 # 1. Load packages ----
 library(quantmod)
 library(forecast)
 library(tseries)
 library(ggplot2)
 library(tidyverse)
+library(arrow)
 
 # 2. Fetching historical price data ----
 
-#Setting up the variables to pulling data
-
+#Setting up the variables for pulling data
 starting_date <- "2020-01-01"
 end_data <- Sys.Date() - 1 # Not including today's date, as its data is still printing
 stock_source <- "yahoo" # Using Yahoo_finance as the source for stock data
 symbol <- "AAPL"
 
-# Fetching data using getSymbols from quantmod
+# Fetching data using quantmod::getSymbols function
 apple_data <- getSymbols(symbol, src = stock_source,
                          from = starting_date, to = end_data, 
                          auto.assign = FALSE)
@@ -29,7 +29,7 @@ apple_tbl <- tibble(
   close = coredata(apple_closes)       # Values
 )
 
-
+# Printing recent rows with Date & Price as columns
 head(cbind(Date = index(apple_closes), Price = coredata(apple_closes)))
 
 # Checking for the amount of NULL values
@@ -38,7 +38,7 @@ sum(is.na(apple_data$AAPL.Close))
 # Checking the dimensions of the dataframe
 dim(apple_closes)
 
-# Checking the range 
+# Checking the range of date in the data
 range(index(apple_closes))
 
 # Checking which classes are inside the data
@@ -47,4 +47,8 @@ class(apple_closes)
 # Printing a summary of the data
 summary(apple_closes)
 
+# Defining the path to save the Parquet file
+output_path <- file.path("data", paste0(symbol, "_stock_data.parquet"))
 
+# Save the data as a Parquet file
+write_parquet(apple_tbl, output_path)
