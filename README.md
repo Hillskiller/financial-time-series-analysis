@@ -1,6 +1,6 @@
-# Time Series Forecasting of Stock Prices in R
+# Time Series Analysis of Financial Data in R
 
-This project explores financial time series forecasting using R. It is designed as a learning project for aspiring quantitative developers and data analysts.
+This project explores financial time series analysis using R. It is designed as a learning project for aspiring quantitative developers and data analysts.
 
 ---
 
