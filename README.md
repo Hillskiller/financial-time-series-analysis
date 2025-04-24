@@ -1,9 +1,10 @@
 # Time Series Analysis of Financial Data in R
 
-## Disclaimer
-This project is for educational purposes only and does not constitute financial advice or a recommendation to buy or sell any securities.
-
 This project explores financial time series analysis using R. It is designed as a learning project for aspiring quantitative developers and data analysts.
+
+## Disclaimer
+
+This project is for educational purposes only and does not constitute financial advice or a recommendation to buy or sell any securities.
 
 ---
 
